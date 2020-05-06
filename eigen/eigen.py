@@ -53,7 +53,7 @@ ANIMATION
 '''
 
 # preparing figure and axes
-fig, axs = plt.subplots(1, 1, figsize = (4, 4))
+fig, axs = plt.subplots(1, 1, figsize = (4.5, 4.5))
 plt.subplots_adjust(top = .8, bottom = .15, wspace = .4)
 
 # function for redrawing at each frame
@@ -62,8 +62,11 @@ def redraw(frame):
 	if MODE == 'dark':
 		axs.grid(color = 'dimgray')
 	axs.set_axisbelow(True)
-	axs.set_xlim(-1.4, 1.6)
-	axs.set_ylim(-1.7, 2.1)
+	axs.set_xlim(-2.5, 2)
+	axs.set_ylim(-1.9, 2.3)
+	axs.set_xticks(np.arange(-2, 2, .5), minor = False)
+	axs.set_yticks(np.arange(-1.5, 2.5, .5), minor = False)
+	axs.set_aspect("equal")
 
 	# transformed grid
 	for line in x_lines_log[frame - 20]:
@@ -71,21 +74,34 @@ def redraw(frame):
 	for line in y_lines_log[frame - 20]:
 		axs.plot(line[0], line[1], alpha = .2, lw = 1, color = colors[0])
 
-	# eigenvectors
-	axs.arrow(0, 0, eigen_log[frame - 20][:, 0][0], eigen_log[frame - 20][:, 0][1],
-			color = colors[2], head_width = .05)
-	axs.arrow(0, 0, eigen_log[frame - 20][:, 1][0], eigen_log[frame - 20][:, 1][1],
-			color = colors[3], head_width = .05)
+	offset = .05
+	for i in [0, 1]:
+		# eigenvectors
+		if MODE == 'light':
+			axs.arrow(0, 0, eigen_log[frame - 20][:, i][0], eigen_log[frame - 20][:, i][1],
+					color = colors[i + 2], width = .015, head_width = .05)
+		else:
+			axs.arrow(0, 0, eigen_log[frame - 20][:, i][0], eigen_log[frame - 20][:, i][1],
+					color = colors[i + 2], head_width = .05)
+		axs.text(eigen_log[frame - 20][:, i][0] - offset, eigen_log[frame - 20][:, i][1] + 
+				offset, 'Eigenvector {}'.format(i + 1), color = colors[i + 2], 
+				size = 'x-small', weight = 'bold', ha = 'right')
 
-	# transformed basis
-	axs.arrow(0, 0, basis_log[frame - 20][:, 0][0], basis_log[frame - 20][:, 0][1],
-			color = colors[0], head_width = .05)
-	axs.arrow(0, 0, basis_log[frame - 20][:, 1][0], basis_log[frame - 20][:, 1][1],
-			color = colors[0], head_width = .05)
+		# transformed basis
+		if MODE == 'light':
+			axs.arrow(0, 0, basis_log[frame - 20][:, i][0], basis_log[frame - 20][:, i][1],
+					color = colors[0], width = .015, head_width = .05)
+		else:
+			axs.arrow(0, 0, basis_log[frame - 20][:, i][0], basis_log[frame - 20][:, i][1],
+					color = colors[0], head_width = .05)
+		axs.text(basis_log[frame - 20][:, i][0] - offset, basis_log[frame - 20][:, i][1] + 
+				offset, 'Standard unit vector', color = colors[0], size = 'x-small', 
+				weight = 'bold', ha = 'right')
 
 	# transformed objects
 	axs.scatter(X_log[frame - 20][0], X_log[frame - 20][1], alpha = .5, s = 25, 
 			color = 'purple')
+
 
 # beginning with original grid and objects
 redraw(frame = 20)
