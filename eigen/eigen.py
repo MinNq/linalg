@@ -87,7 +87,7 @@ def redraw(frame):
 	axs.scatter(X_log[frame - 20][0], X_log[frame - 20][1], alpha = .5, s = 25, 
 			color = 'purple')
 
-# begining with original grid and objects
+# beginning with original grid and objects
 redraw(frame = 20)
 
 # animation update function
