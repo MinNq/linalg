@@ -7,4 +7,4 @@ Visualizing linear algebra
 
 ## Example
 
-![eigen](https://i.imgur.com/hY8KNto.gif)
+<img src='https://i.imgur.com/hY8KNto.gif' height='400'>
