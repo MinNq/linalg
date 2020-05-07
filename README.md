@@ -7,4 +7,4 @@ Visualizing linear algebra with Python
 
 ## Example
 
-<img src='https://i.imgur.com/IWvmQjF.gif' height='450'>
+<img src='https://i.imgur.com/iMiMPly.gif' height='450'>
