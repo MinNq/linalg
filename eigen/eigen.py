@@ -32,8 +32,8 @@ basis_log = []
 X = -2*np.random.rand(2, 15) + 1
 X_log = []
 
-x_grid = np.arange(-10, 10.5, .5)
-y_grid = np.arange(-10, 10.5, .5)
+x_grid = np.arange(-8, 8, 1)
+y_grid = np.arange(-8, 8, 1)
 x_lines = [([x]*2, [-10, 10]) for x in x_grid]
 y_lines = [([-10, 10], [y]*2) for y in y_grid]
 x_lines_log = []
@@ -54,7 +54,7 @@ ANIMATION
 
 # preparing figure and axes
 fig, axs = plt.subplots(1, 1, figsize = (4.5, 4.5))
-plt.subplots_adjust(top = .8, bottom = .15, wspace = .4)
+plt.subplots_adjust(top = .8, bottom = .1, wspace = .4)
 
 # function for redrawing at each frame
 def redraw(frame):
@@ -64,8 +64,8 @@ def redraw(frame):
 	axs.set_axisbelow(True)
 	axs.set_xlim(-2.5, 2)
 	axs.set_ylim(-1.9, 2.3)
-	axs.set_xticks(np.arange(-2, 2, .5), minor = False)
-	axs.set_yticks(np.arange(-1.5, 2.5, .5), minor = False)
+	axs.set_xticks(np.arange(-2, 2, 1), minor = False)
+	axs.set_yticks(np.arange(-1, 2.5, 1), minor = False)
 	axs.set_aspect("equal")
 
 	# transformed grid
@@ -104,17 +104,22 @@ def redraw(frame):
 
 
 # beginning with original grid and objects
-redraw(frame = 20)
+redraw(20)
 
 # animation update function
 def show_animation(frame):
 
 	plt.suptitle('Linear Transformation and Eigenvectors', y = .9, size = 'x-large')
-	# < 20 and > 39 are static
-	if 19 < frame < 40:
+	# 20 to 40: transformation
+	if 19 < frame < 41:
 		axs.cla()
 		redraw(frame)
+	# 41 to 60: static
+	# 61 to 81: back-transformation
+	if 60 < frame < 82:
+		axs.cla()
+		redraw(80 - frame)
 
-anim = FuncAnimation(fig, show_animation, interval = 50, frames = 61)
+anim = FuncAnimation(fig, show_animation, interval = 40, frames = 81)
 
 anim.save('eigen.gif', writer = 'imagemagick', dpi = 200)
