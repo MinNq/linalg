@@ -1,6 +1,6 @@
 # linalg
 
-Visualizing linear algebra with Python
+Animating linear algebra with Python
 
 ## Contents
 - [Linear transformation and eigenvectors](https://github.com/MinNq/linalg/tree/master/eigen)
