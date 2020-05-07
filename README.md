@@ -3,7 +3,7 @@
 Visualizing linear algebra with Python
 
 ## Contents
-- [Linear Transformation and Eigenvectors](https://github.com/MinNq/linalg/tree/master/eigen)
+- [Linear transformation and eigenvectors](https://github.com/MinNq/linalg/tree/master/eigen)
 
 ## Example
 
